@@ -6,12 +6,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:smart_soft/core/infrastructure/services/image_picker_service.dart';
 import 'package:smart_soft/core/usecases/validate_username_use_case.dart';
-import 'package:smart_soft/features/auth/domain/usecases/register_use_case.dart';
+import 'package:smart_soft/features/auth/domain/usecases/register_seller_use_case.dart';
 import 'package:smart_soft/features/auth/domain/usecases/send_otp_use_case.dart';
 import 'package:smart_soft/features/auth/views/screens/00_auth_methods_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/01_login_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/04_otp_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/05_message_screen.dart';
+import 'package:smart_soft/features/seller_home/views/screens/seller_home_screen.dart';
 
 import '../../../../../core/di/app_module.dart';
 import '../../../../../core/errors/failure.dart';
@@ -33,8 +34,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   XFile? file;
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  late final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? validateUsername(){
     return getIt<ValidateUsernameUseCase>().call(usernameController.text);
@@ -65,33 +65,34 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
 
-  onRegisterClick(BuildContext context){
-    if(formKey.currentState!.validate()){
-      sendOtp(context);
-    }
+  onRegisterClick(BuildContext context) {
+    // if(formKey.currentState!.validate()){
+    //   sendOtp(context);
+    // }
+    _navigateToSellerHomeScreen(context);
   }
 
   onLoginClick(BuildContext context){
-    navigateToLoginScreen(context);
+    _navigateToLoginScreen(context);
   }
 
   onDoneClick(BuildContext context){
-    navigateToAuthMethodsScreen(context);
+    _navigateToAuthMethodsScreen(context);
   }
 
   onUploadClick(){
-    pickPhoto();
+    _pickPhoto();
   }
 
-  pickPhoto() async {
+  _pickPhoto() async {
     emit(RegisterPickPhoto());
     file = await getIt<ImagePickerService>().pickImageFromGallery();
     emit(RegisterInitial());
   }
 
-  register(BuildContext context){
+  _register(BuildContext context){
     emit(RegisterLoading());
-    getIt<RegisterUseCase>().call(phoneNumberController.text,passwordController.text)
+    getIt<RegisterSellerUseCase>().call(phoneNumberController.text,passwordController.text)
     .then((value) => value.fold(
       (error) {
         emit(RegisterError(error));
@@ -104,13 +105,13 @@ class RegisterCubit extends Cubit<RegisterState> {
       },
       (success) {
         emit(RegisterSuccess());
-        navigateToRegisterMessageScreen(context);
+        _navigateToRegisterMessageScreen(context);
         emit(RegisterInitial());
       }
     ));
   }
 
-  sendOtp(BuildContext context){
+  _sendOtp(BuildContext context){
     emit(RegisterLoading());
     getIt<SendOtpUseCase>().call(phoneNumberController.text)
         .then((value) => value.fold(
@@ -125,31 +126,37 @@ class RegisterCubit extends Cubit<RegisterState> {
           },
           (success) {
             emit(RegisterSuccess());
-            navigateToOtpScreen(context);
+            _navigateToSellerHomeScreen(context);
             emit(RegisterInitial());
           }
     ));
 
   }
 
-  navigateToLoginScreen(BuildContext context) {
+  _navigateToLoginScreen(BuildContext context) {
     Navigator.push(context,MaterialPageRoute(builder: (_)=> const LoginScreen()));
   }
 
-
-  navigateToRegisterMessageScreen(BuildContext context) {
+  _navigateToRegisterMessageScreen(BuildContext context) {
     Navigator.push(context,MaterialPageRoute(builder: (_)=> MessageScreen(
       title: LocaleKeys.all_done.tr(),
       description: LocaleKeys.all_done_description.tr(),
     )));
   }
 
-  navigateToAuthMethodsScreen(BuildContext context) {
+  _navigateToAuthMethodsScreen(BuildContext context) {
     Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (_)=> const AuthMethodsScreen()), (route) => false);
   }
 
-  navigateToOtpScreen(BuildContext context) {
+  _navigateToSellerHomeScreen(BuildContext context) {
+    Navigator.push(context,MaterialPageRoute(builder: (_)=> SellerHomeScreen()));
+
+
+  _navigateToOtpScreen(BuildContext context) {
     Navigator.push(context,MaterialPageRoute(builder: (_)=> OtpScreen(phoneNumber: phoneNumberController.text,)));
   }
+
+  }
+
 
 }

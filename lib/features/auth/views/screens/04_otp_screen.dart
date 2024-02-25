@@ -17,11 +17,23 @@ import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../blocs/login/login_cubit.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
 
   String phoneNumber;
 
   OtpScreen({super.key,required this.phoneNumber});
+
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+
+  @override
+  void initState() {
+    context.read<OtpCubit>().pinCode = "";
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +106,7 @@ class OtpScreen extends StatelessWidget {
                 ),
 
                 InkWell(
-                  onTap: () => context.read<OtpCubit>().onResendClick(context,phoneNumber),
+                  onTap: () => context.read<OtpCubit>().onResendClick(context,widget.phoneNumber),
                   child: Text(
                     LocaleKeys.resend.tr(),
                     style: AppTheme.mainTextStyle(
@@ -113,18 +125,18 @@ class OtpScreen extends StatelessWidget {
               listener: (context, state) {},
               builder: (context, state) {
                 return MainButton(
-                          color: AppTheme.primary900,
-                          width: 86.w,
-                          height: 6.5.h,
-                          label: (state is OtpLoading)? CustomProgressIndicator(
-                            color: AppTheme.neutral100,
-                          ) :Text(
-                            LocaleKeys.confirm,
-                            style: AppTheme.mainTextStyle(
-                                color: AppTheme.neutral100, fontSize: 13.sp),
-                          ).tr(),
-                          onTap: () => context.read<OtpCubit>().onConfirmClick(context),
-                        );
+                  color: AppTheme.primary900,
+                  width: 86.w,
+                  height: 6.5.h,
+                  label: (state is OtpLoading)? CustomProgressIndicator(
+                    color: AppTheme.neutral100,
+                  ) :Text(
+                    LocaleKeys.confirm,
+                    style: AppTheme.mainTextStyle(
+                        color: AppTheme.neutral100, fontSize: 13.sp),
+                  ).tr(),
+                  onTap: () => context.read<OtpCubit>().onConfirmClick(context),
+                );
               },
             ),
 

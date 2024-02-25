@@ -8,6 +8,8 @@
   "on_boarding_description_3": "الوصف: بسّط إدارة قطع الأثاث مع هذا التطبيق البديهي، مما يضمن تتبعًا وثائقًا سهلين.",
 
   "next": "التالي",
+  "previous": "السابق",
+
   "skip": "تخطي",
 
   "auth_method_title": "اهلا بك",
@@ -65,5 +67,52 @@
   "confirm_code_sub_text" : "تم ارسال كود مكون من اربع ارقام في رساله نصيه لرقم الهاتف الخاص بك, ادخل الكود بالاسفل",
   "didnt_recive_code" : "لم اتلقى اي رسائل؟",
   "resend" : "اعاده الارسال",
-  "confirm" : "تاكيد"
+  "confirm" : "تاكيد",
+
+  "make_your_design" : "نفذ تصميمك الان",
+
+  "chose_tailor" : "اختر الخياط",
+  "filter_by_city" : "فلتر حسب المدينه",
+
+  "fabric" : "القماش",
+  "collar" : "الياقه",
+  "chest" : "الصدر",
+  "front_pocket" : "الجيب الامامي",
+  "sleeve" : "الكم",
+  "button" : "الزر",
+  "embroidery": "التطريز",
+  "price": "السعر",
+  "cart": "سله المشتريات",
+  "check_out": "الدفع",
+  "quantity" : "الكميه",
+  "total" : "الاجمالي",
+
+  "cloth_size" : "مقاسات الثوب",
+
+
+  "length": "الطول",
+  "shoulder": "الكتف",
+  "neck": "الرقبة",
+  "hand": "اليد",
+  "cuff": "الكم",
+  "notes": "ملاحظات",
+
+  "cloth_details" : "تفاصيل الثوب",
+  "cloth_design" : "تصميم الثوب",
+  "continue_shopping" : "كمل التسوق",
+  "customer_details" : "تفاصيل العميل",
+  "location" : "المكان",
+  "payment_methods" : "طرق الدفع",
+
+  "visa" : "فيزا",
+  "cash" : "نقدي",
+
+  "payment_message_title" : "تم ارسال طلبك بنجاح",
+  "payment_message_sub_title" : "سوف يتم تنفيذ الثوب خلال 12 يوم و سوف يتم التوصيل معك لتحديد الوقت المناسب لتوصيله اليك ",
+
+  "order": "الطلبات",
+  "completed_orders": "الطلبات المنفذه",
+  "uncompleted_orders": "الطلبات الغير منفذه",
+  "profile": "الملف الشخصي"
+
 }

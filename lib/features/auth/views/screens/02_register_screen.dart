@@ -14,13 +14,13 @@ import '../../../../core/views/widgets/custom_text_field.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../blocs/login/login_cubit.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(child: Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 7.w),

@@ -5,12 +5,12 @@ import 'package:smart_soft/features/auth/domain/repo/auth_repo.dart';
 
 import '../../../../core/errors/failure.dart';
 
-class SignInUseCase {
+class LoginUseCase {
 
   AuthRepo repo = getIt<AuthRepo>();
 
   Future<Either<Failure, UserModel>> call(String email,String password) async {
-    return await repo.signIn(email: email, password: password);
+    return await repo.Login(email: email, password: password);
   }
 
 }

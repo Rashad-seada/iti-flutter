@@ -5,7 +5,7 @@ import 'package:smart_soft/features/auth/domain/repo/auth_repo.dart';
 
 import '../../../../core/errors/failure.dart';
 
-class RegisterUseCase {
+class RegisterSellerUseCase {
 
   AuthRepo repo = getIt<AuthRepo>();
 

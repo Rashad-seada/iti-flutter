@@ -49,11 +49,16 @@ dependencies:
 
   # Services
   image_picker:
+  internet_connection_checker_plus:
+  get_it:
 
   # Firebase
-  firebase_core:
-  firebase_auth:
   cloud_firestore:
+  firebase_analytics:
+  firebase_auth:
+  firebase_core:
+  firebase_crashlytics:
+
   activout_firebase_options_selector:
 
   # UI
@@ -65,11 +70,12 @@ dependencies:
   another_flushbar:
   loading_animation_widget:
   pinput:
-
+  cached_network_image:
+  flutter_rating_bar:
 
   # Service
-  internet_connection_checker_plus:
-  get_it:
+  jwt_decoder: 
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

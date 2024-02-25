@@ -8,6 +8,8 @@
   "on_boarding_description_3": "Streamline the management of your furniture pieces with this intuitive app, ensuring easy tracking and documentation.",
 
   "next": "Next",
+  "previous": "Previous",
+
   "skip": "Skip",
 
   "auth_method_title": "Welcome",
@@ -64,6 +66,53 @@
   "confirm_code_sub_text": "A four-digit code has been sent to your phone number via text message. Enter the code below.",
   "didnt_recive_code": "Didn't Receive Any Messages?",
   "resend": "Resend",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+
+  "make_your_design" : "Make your design now",
+
+  "chose_tailor" : "Chose tailor",
+  "filter_by_city" : "Filter by city",
+
+  "fabric" : "fabric",
+  "collar" : "collar",
+  "front_pocket" : "front pocket",
+  "button" : "button",
+  "embroidery": "embroidery",
+  "price": "Price",
+
+  "cart": "Cart",
+  "check_out": "Checkout",
+  "quantity" : "Quantity",
+  "total" : "Total",
+
+  "cloth_size" : "Cloth size",
+
+  "length" : "Length",
+  "shoulder" : "Shoulder",
+  "sleeve" : "Sleeve",
+  "chest" : "Chest",
+  "neck" : "Neck",
+  "hand" : "Hand",
+  "cuff" : "Cuff",
+  "notes" : "Notes",
+
+  "cloth_details" : "Cloth details",
+  "cloth_design" : "Cloth design",
+  "continue_shopping" : "Continue shopping",
+  "customer_details" : "Customer details",
+  "location" : "Location",
+  "payment_methods" : "Payment methods",
+  "visa" : "Visa",
+  "cash" : "Cash",
+
+  "payment_message_title" : "Your order has been sent successfully",
+  "payment_message_sub_title" : "your order will be done in 12 days and we will contact you to chose the perfect time to deliver the order to you",
+
+  "order": "Order",
+  "completed_orders": "Completed orders",
+  "uncompleted_orders": "Uncompleted orders",
+  "profile": "Profile"
+
+
 
 }

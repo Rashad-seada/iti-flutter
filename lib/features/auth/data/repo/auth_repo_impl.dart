@@ -51,7 +51,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure,UserModel>> signIn({required String email, required String password}) async {
+  Future<Either<Failure,UserModel>> Login({required String email, required String password}) async {
     try{
 
       if(!await networkService.isConnected){

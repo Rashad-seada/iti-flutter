@@ -30,7 +30,7 @@ class PinTextField extends StatelessWidget {
 
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color.fromRGBO(234, 239, 243, 1),
+        color: const Color.fromRGBO(234, 239, 243, 1),
       ),
     );
 

@@ -5,9 +5,10 @@ import 'package:smart_soft/core/di/app_module.dart';
 import 'package:smart_soft/core/errors/failure.dart';
 import 'package:smart_soft/core/usecases/validate_password_use_case.dart';
 import 'package:smart_soft/core/usecases/validate_phone_use_case.dart';
-import 'package:smart_soft/features/auth/domain/usecases/sign_in_use_case.dart';
+import 'package:smart_soft/features/auth/domain/usecases/login_use_case.dart';
 import 'package:smart_soft/features/auth/views/screens/02_register_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/03_reset_password_screen.dart';
+import 'package:smart_soft/features/home/views/screens/06_home_screen.dart';
 
 import '../../../../../core/views/widgets/custom_flush_bar.dart';
 
@@ -18,9 +19,10 @@ class LoginCubit extends Cubit<LoginState> {
 
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool rememberMe = true;
+  bool rememberMe = true ;
 
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  late final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
 
   String? validatePhone(){
     return getIt<ValidatePhoneUseCase>().call(phoneNumberController.text);
@@ -35,9 +37,11 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   onLoginClick(BuildContext context){
-    if(formKey.currentState!.validate()) {
-      login(context);
-    }
+    // if(formKey.currentState!.validate()) {
+    //   login(context);
+    // }
+    navigateToHomeScreen(context);
+
   }
 
   onRegisterClick(BuildContext context){
@@ -46,7 +50,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   login(BuildContext context){
     emit(LoginLoading());
-    getIt<SignInUseCase>().call(phoneNumberController.text, passwordController.text).then(
+    getIt<LoginUseCase>().call(phoneNumberController.text, passwordController.text).then(
       (value) => value.fold(
         (error) {
           emit(LoginError(error));
@@ -76,6 +80,10 @@ class LoginCubit extends Cubit<LoginState> {
 
   navigateToResetPasswordScreen(BuildContext context){
     Navigator.push(context,MaterialPageRoute(builder: (_)=> const ResetPasswordScreen()));
+  }
+
+  navigateToHomeScreen(BuildContext context){
+    Navigator.push(context,MaterialPageRoute(builder: (_)=> const HomeScreen()));
   }
 
 }
