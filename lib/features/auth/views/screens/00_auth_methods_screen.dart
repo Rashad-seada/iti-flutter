@@ -5,12 +5,14 @@ import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/config/app_images.dart';
 import 'package:smart_soft/core/views/widgets/custom_divider.dart';
 import 'package:smart_soft/core/views/widgets/space.dart';
+import 'package:smart_soft/features/auth/utils/register_type.dart';
 import 'package:smart_soft/features/auth/views/screens/01_login_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/02_register_screen.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
 import '../../../../core/config/app_theme.dart';
 import '../../../../core/views/widgets/main_button.dart';
+import '../../../admin/admin_home/views/screens/admin_home_screen.dart';
 
 class AuthMethodsScreen extends StatelessWidget {
   const AuthMethodsScreen({Key? key}) : super(key: key);
@@ -19,10 +21,17 @@ class AuthMethodsScreen extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (_)=> const LoginScreen()));
   }
 
-  void navigateToRegistrationScreen(BuildContext context){
-    Navigator.push(context, MaterialPageRoute(builder: (_)=> const RegisterScreen()));
+  void navigateToRegisterCustomerScreen(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (_)=> RegisterScreen(registerType: RegisterType.RegisterCustomer,)));
   }
 
+  void navigateToRegisterSellerScreen(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (_)=> RegisterScreen(registerType: RegisterType.RegisterSeller,)));
+  }
+
+  void navigateToRegisterAdminScreen(BuildContext context){
+    Navigator.push(context, MaterialPageRoute(builder: (_)=> AdminHomeScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +43,23 @@ class AuthMethodsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             Space(
               height: 4.h,
             ),
+
             Center(
               child: Image.asset(
                 AppImages.authMethods,
                 width: 86.w,
-                height: 28.h,
+                height: 23.h,
               ),
             ),
+
             Space(
-              height: 4.h,
+              height: 3.h,
             ),
+
             Text(
               LocaleKeys.auth_method_title,
               style: AppTheme.mainTextStyle(
@@ -65,7 +78,7 @@ class AuthMethodsScreen extends StatelessWidget {
               ).tr(),
             ),
             Space(
-              height: 6.h,
+              height: 5.h,
             ),
             MainButton(
               color: AppTheme.primary900,
@@ -98,7 +111,7 @@ class AuthMethodsScreen extends StatelessWidget {
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.primary900, fontSize: 13.sp),
               ).tr(),
-              onTap: ()=> navigateToRegistrationScreen(context),
+              onTap: ()=> navigateToRegisterCustomerScreen(context),
             ),
 
             Space(
@@ -114,7 +127,24 @@ class AuthMethodsScreen extends StatelessWidget {
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.primary900, fontSize: 13.sp),
               ).tr(),
-              onTap: ()=> navigateToRegistrationScreen(context),
+              onTap: ()=> navigateToRegisterSellerScreen(context),
+            ),
+
+            Space(
+              height: 3.h,
+            ),
+
+            MainButton(
+              width: 86.w,
+              height: 6.5.h,
+              border: Border.all(color: AppTheme.primary900,width: 0.2.w),
+              color: Colors.transparent,
+              label: Text(
+                LocaleKeys.register_admin,
+                style: AppTheme.mainTextStyle(
+                    color: AppTheme.primary900, fontSize: 13.sp),
+              ).tr(),
+              onTap: ()=> navigateToRegisterAdminScreen(context),
             ),
           ],
         ),

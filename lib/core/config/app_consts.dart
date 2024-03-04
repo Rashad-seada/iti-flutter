@@ -10,4 +10,10 @@ class AppConsts {
 
   static const String loginEndPoint = "/Auth/SginIn";
 
+  static const String resetPasswordEndPoint = "/Auth/ResetPassword";
+
+  static const String boxName = "USER_BOX";
+
+  static const String userKey = "USER_KEY";
+
 }

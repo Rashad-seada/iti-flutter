@@ -30,6 +30,7 @@ class CodegenLoader extends AssetLoader{
   "register": "انشاء حساب",
   "register_tailor": "انشاء حساب كخياط",
   "register_buyer": "انشاء حساب كمشتري",
+  "register_admin": "انشاء حساب كمشرف",
   "login_description": "قم بتسجيل الدخول لتجربة فريدة وشخصية",
   "register_description": "سجّل للوصول إلى تجربة حصرية",
   "username": "اسم المستخدم",
@@ -101,7 +102,13 @@ class CodegenLoader extends AssetLoader{
   "order": "الطلبات",
   "completed_orders": "الطلبات المنفذه",
   "uncompleted_orders": "الطلبات الغير منفذه",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "dashboard": "لوحه التحكم",
+  "pending_seller": "طلبات الخياطين المعلقه",
+  "new_user": "مستخدم جديد",
+  "new_seller": "خياط جديد",
+  "monthly_income": "الدخل الشهري",
+  "welcome_back": "اهلا من جديد"
 };
 static const Map<String,dynamic> en = {
   "on_boarding_title_1": "Digital Catalog",
@@ -119,6 +126,7 @@ static const Map<String,dynamic> en = {
   "register": "Register",
   "register_tailor": "Register as Tailor",
   "register_buyer": "Register as Buyer",
+  "register_admin": "Register as Admin",
   "login_description": "Unlock Your World: Sign In for a Personalized Experience",
   "register_description": "Embark on Your Journey: Register for Exclusive Access",
   "username": "Username",
@@ -190,7 +198,13 @@ static const Map<String,dynamic> en = {
   "order": "Order",
   "completed_orders": "Completed orders",
   "uncompleted_orders": "Uncompleted orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "dashboard": "Dashboard",
+  "pending_seller": "Pending seller request",
+  "new_user": "New user",
+  "new_seller": "New seller",
+  "monthly_income": "Monthly income",
+  "welcome_back": "Welcome back"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

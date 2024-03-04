@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/features/cart/views/components/quantity_component.dart';
-import 'package:smart_soft/features/seller_home/views/screens/order_details_screen.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
-import '../../../../core/config/app_images.dart';
-import '../../../../core/config/app_theme.dart';
-import '../../../../core/views/widgets/space.dart';
+import '../../../../../core/config/app_images.dart';
+import '../../../../../core/config/app_theme.dart';
+import '../../../../../core/views/widgets/space.dart';
+import '../screens/order_details_screen.dart';
+
 
 class OrderCard extends StatelessWidget {
   const OrderCard({super.key});

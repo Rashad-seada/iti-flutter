@@ -31,6 +31,12 @@ abstract class AppTheme {
 
   static const Color backgroundColor = Color(0xffFFFFFF);
 
+  static const Color green = Color(0xff9dd165);
+  static const Color yellow = Color(0xfffac44b);
+  static const Color blue = Color(0xff5998e8);
+  static const Color red = Color(0xffe44d5d);
+
+
   static const double font32 = 28;
   static const double font28 = 24;
   static const double font21 = 17;

@@ -4,8 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/views/widgets/custom_network_image.dart';
 import 'package:smart_soft/core/views/widgets/space.dart';
 
-import '../../../../core/config/app_images.dart';
-import '../../../../core/config/app_theme.dart';
+import '../../../../../core/config/app_theme.dart';
 import '../utils/user_info_model.dart';
 
 class UserInfoItem extends StatelessWidget {

@@ -46,5 +46,8 @@ class AppImages {
   static String close= "images/close.svg";
   static String order= "images/order.svg";
 
+  static String inbox = "images/inbox.svg";
+  static String calender = "images/calender.svg";
+
 
 }

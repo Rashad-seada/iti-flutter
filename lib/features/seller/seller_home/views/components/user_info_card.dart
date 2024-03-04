@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/config/app_theme.dart';
 import 'package:smart_soft/core/views/widgets/space.dart';
-import 'package:smart_soft/features/seller_home/views/components/user_info_item.dart';
-import 'package:smart_soft/features/seller_home/views/utils/user_info_model.dart';
+import 'package:smart_soft/features/seller/seller_home/views/components/user_info_item.dart';
 import 'package:smart_soft/features/variation/views/utils/design_model.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
-import '../../../variation/views/components/cloth_design_item.dart';
+import '../utils/user_info_model.dart';
 
 
 

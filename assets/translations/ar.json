@@ -19,6 +19,7 @@
   "register": "انشاء حساب",
   "register_tailor": "انشاء حساب كخياط",
   "register_buyer": "انشاء حساب كمشتري",
+  "register_admin": "انشاء حساب كمشرف",
 
   "login_description": "قم بتسجيل الدخول لتجربة فريدة وشخصية",
   "register_description": "سجّل للوصول إلى تجربة حصرية",
@@ -113,6 +114,14 @@
   "order": "الطلبات",
   "completed_orders": "الطلبات المنفذه",
   "uncompleted_orders": "الطلبات الغير منفذه",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "dashboard": "لوحه التحكم",
+
+  "pending_seller": "طلبات الخياطين المعلقه",
+  "new_user": "مستخدم جديد",
+  "new_seller": "خياط جديد",
+  "monthly_income": "الدخل الشهري",
+  "welcome_back": "اهلا من جديد"
+
 
 }

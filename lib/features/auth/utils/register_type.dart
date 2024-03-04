@@ -1,0 +1,4 @@
+enum RegisterType {
+  RegisterCustomer,
+  RegisterSeller
+}

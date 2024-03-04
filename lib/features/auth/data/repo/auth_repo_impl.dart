@@ -1,24 +1,28 @@
 import 'package:dartz/dartz.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:smart_soft/features/auth/data/data_source/local_data_source/auth_local_data_source.dart';
 import 'package:smart_soft/features/auth/data/data_source/remote_data_source/auth_remote_data_source.dart';
-
+import 'package:smart_soft/features/auth/data/entities/login_response.dart';
+import 'package:smart_soft/features/auth/data/entities/register_customer_response.dart';
+import 'package:smart_soft/features/auth/data/entities/register_seller_response.dart';
+import 'package:smart_soft/features/auth/data/entities/reset_password_response.dart';
+import 'package:smart_soft/features/auth/data/entities/user_entity.dart';
 
 import '../../../../core/di/app_module.dart';
 import '../../../../core/errors/exception.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/infrastructure/services/network_service.dart';
-import '../../domain/model/user_model.dart';
 import '../../domain/repo/auth_repo.dart';
-import '../data_source/remote_data_source/firebase_service.dart';
 
 class AuthRepoImpl implements AuthRepo {
 
   NetworkService networkService = getIt<NetworkService>();
-  FirebaseService remoteDataSource = getIt<FirebaseService>();
-  AuthRemoteDataSource authRemoteDataSource = getIt<AuthRemoteDataSource>();
+  AuthRemoteDataSource remoteDataSource = getIt<AuthRemoteDataSource>();
+  AuthLocalDataSource localDataSource = getIt<AuthLocalDataSource>();
 
 
   @override
-  Future<Either<Failure,UserModel>> register({required String email, required String password}) async {
+  Future<Either<Failure, LoginResponse>> login({required String phoneNumber, required String password}) async {
     try{
 
       if(!await networkService.isConnected){
@@ -28,16 +32,17 @@ class AuthRepoImpl implements AuthRepo {
         ));
       }
 
-      UserModel user = await remoteDataSource.signUpWithEmailAndPassword(email: email, password: password);
 
-      if(user.id == null){
+      LoginResponse loginResponse = await remoteDataSource.login(phoneNumber: phoneNumber, password: password);
+
+      if (loginResponse.isSuccssed == false) {
         return left(RemoteDataFailure(
-            "Failed to sign up, please try again later",
+            loginResponse.message.toString(),
             failureCode: 1
         ));
       }
 
-      return right(user);
+      return right(loginResponse);
 
     } on RemoteDataException catch (e){
       return left(RemoteDataFailure(e.message, failureCode: 2));
@@ -51,7 +56,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Either<Failure,UserModel>> Login({required String email, required String password}) async {
+  Future<Either<Failure, RegisterCustomerResponse>> registerCustomer({required String username, required String phoneNumber, required String password}) async {
     try{
 
       if(!await networkService.isConnected){
@@ -61,18 +66,19 @@ class AuthRepoImpl implements AuthRepo {
         ));
       }
 
-      UserModel user = await remoteDataSource.signInWithEmailAndPassword(email:email, password:password);
 
-      if(user.id == null){
+      RegisterCustomerResponse registerCustomerResponse = await remoteDataSource.registerCustomer(username: username, phoneNumber: phoneNumber, password: password);
+
+      if (registerCustomerResponse.isSuccssed == false) {
         return left(RemoteDataFailure(
-            "Failed to sign in, please try again later",
+            registerCustomerResponse.message.toString(),
             failureCode: 1
         ));
       }
 
-      return right(user);
+      return right(registerCustomerResponse);
 
-    }on RemoteDataException catch (e){
+    } on RemoteDataException catch (e){
       return left(RemoteDataFailure(e.message, failureCode: 2));
 
     } on ServiceException catch (e){
@@ -81,8 +87,76 @@ class AuthRepoImpl implements AuthRepo {
     } catch (e) {
       return left(InternalFailure(e.toString(),failureCode: 4));
     }
-
   }
+
+  @override
+  Future<Either<Failure, RegisterSellerResponse>> registerSeller({required String username, required String phoneNumber, required String tradeRegister, required String taxId, required String password, required String locationId, required XFile registerImg}) async {
+    try{
+
+      if(!await networkService.isConnected){
+        return left(ServiceFailure(
+            "Please check your internet connection",
+            failureCode: 0
+        ));
+      }
+
+
+      RegisterSellerResponse registerSellerResponse = await remoteDataSource.registerSeller(username: username, phoneNumber: phoneNumber, tradeRegister: tradeRegister, taxId: taxId, password: password, locationId: locationId, registerImg: registerImg);
+
+      if (registerSellerResponse.isSuccssed == false) {
+        return left(RemoteDataFailure(
+            registerSellerResponse.message.toString(),
+            failureCode: 1
+        ));
+      }
+
+      return right(registerSellerResponse);
+
+    } on RemoteDataException catch (e){
+      return left(RemoteDataFailure(e.message, failureCode: 2));
+
+    } on ServiceException catch (e){
+      return left(ServiceFailure(e.message,failureCode: 3));
+
+    } catch (e) {
+      return left(InternalFailure(e.toString(),failureCode: 4));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ResetPasswordResponse>> resetPassword({required String newPassword, required String phoneNumber}) async {
+    try{
+
+      if(!await networkService.isConnected){
+        return left(ServiceFailure(
+            "Please check your internet connection",
+            failureCode: 0
+        ));
+      }
+
+
+      ResetPasswordResponse resetPasswordResponse = await remoteDataSource.resetPassword(newPassword: newPassword, phoneNumber: phoneNumber);
+
+      if (resetPasswordResponse.isSuccssed ?? false) {
+        return left(RemoteDataFailure(
+            resetPasswordResponse.message.toString(),
+            failureCode: 1
+        ));
+      }
+
+      return right(resetPasswordResponse);
+
+    } on RemoteDataException catch (e){
+      return left(RemoteDataFailure(e.message, failureCode: 2));
+
+    } on ServiceException catch (e){
+      return left(ServiceFailure(e.message,failureCode: 3));
+
+    } catch (e) {
+      return left(InternalFailure(e.toString(),failureCode: 4));
+    }
+  }
+
 
   @override
   Future<Either<Failure, void>> confirmOtp({required String otp}) async {
@@ -95,7 +169,7 @@ class AuthRepoImpl implements AuthRepo {
         ));
       }
 
-      await authRemoteDataSource.confirmOtp(otp: otp);
+      await remoteDataSource.confirmOtp(otp: otp);
 
       return right(null);
 
@@ -121,7 +195,7 @@ class AuthRepoImpl implements AuthRepo {
         ));
       }
 
-      await authRemoteDataSource.sendOtp(phoneNumber: phoneNumber);
+      await remoteDataSource.sendOtp(phoneNumber: phoneNumber);
 
       return right(null);
 
@@ -130,6 +204,70 @@ class AuthRepoImpl implements AuthRepo {
 
     } on ServiceException catch (e){
       return left(ServiceFailure(e.message,failureCode: 2));
+
+    } catch (e) {
+      return left(InternalFailure(e.toString(),failureCode: 3));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteUser() async {
+    try{
+
+      await localDataSource.deleteUser();
+
+      return right(null);
+
+    }on LocalDataException catch (e){
+      return left(LocalDataFailure(e.message, failureCode: 1));
+
+    } catch (e) {
+      return left(InternalFailure(e.toString(),failureCode: 3));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> getUser() async {
+    try{
+
+      final user = await localDataSource.getUser();
+
+      return right(user);
+
+    }on LocalDataException catch (e){
+      return left(LocalDataFailure(e.message, failureCode: 1));
+
+    } catch (e) {
+      return left(InternalFailure(e.toString(),failureCode: 3));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> setUser(UserEntity user) async {
+    try{
+
+      await localDataSource.setUser(user);
+
+      return right(null);
+
+    }on LocalDataException catch (e){
+      return left(LocalDataFailure(e.message, failureCode: 1));
+
+    } catch (e) {
+      return left(InternalFailure(e.toString(),failureCode: 3));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> updateUser(UserEntity updatedUser) async {
+    try{
+
+      final user = await localDataSource.updateUser(updatedUser);
+
+      return right(user);
+
+    }on LocalDataException catch (e){
+      return left(LocalDataFailure(e.message, failureCode: 1));
 
     } catch (e) {
       return left(InternalFailure(e.toString(),failureCode: 3));

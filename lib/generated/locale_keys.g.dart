@@ -16,6 +16,7 @@ abstract class  LocaleKeys {
   static const register = 'register';
   static const register_tailor = 'register_tailor';
   static const register_buyer = 'register_buyer';
+  static const register_admin = 'register_admin';
   static const login_description = 'login_description';
   static const register_description = 'register_description';
   static const username = 'username';
@@ -88,5 +89,11 @@ abstract class  LocaleKeys {
   static const completed_orders = 'completed_orders';
   static const uncompleted_orders = 'uncompleted_orders';
   static const profile = 'profile';
+  static const dashboard = 'dashboard';
+  static const pending_seller = 'pending_seller';
+  static const new_user = 'new_user';
+  static const new_seller = 'new_seller';
+  static const monthly_income = 'monthly_income';
+  static const welcome_back = 'welcome_back';
 
 }

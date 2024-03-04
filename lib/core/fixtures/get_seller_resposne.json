@@ -1,0 +1,43 @@
+
+{
+
+  "isSuccessed": "true",
+  "obj": {
+    "slevee": [
+      {
+        "id": "",
+        "name": "",
+        "image": ""
+      },
+      {
+        "id": "",
+        "name": "",
+        "image": ""
+      },
+      {
+        "id": "",
+        "name": "",
+        "image": ""
+      }
+    ],
+
+    "button": [
+      {
+        "id": "",
+        "name": "",
+        "image": ""
+      },
+      {
+        "id": "",
+        "name": "",
+        "image": ""
+      },
+      {
+        "seller_id": "",
+        "profile_image": "",
+        "name": ""
+      }
+    ]
+  }
+
+}

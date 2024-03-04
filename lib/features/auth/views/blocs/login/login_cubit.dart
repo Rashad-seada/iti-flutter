@@ -6,6 +6,7 @@ import 'package:smart_soft/core/errors/failure.dart';
 import 'package:smart_soft/core/usecases/validate_password_use_case.dart';
 import 'package:smart_soft/core/usecases/validate_phone_use_case.dart';
 import 'package:smart_soft/features/auth/domain/usecases/login_use_case.dart';
+import 'package:smart_soft/features/auth/utils/register_type.dart';
 import 'package:smart_soft/features/auth/views/screens/02_register_screen.dart';
 import 'package:smart_soft/features/auth/views/screens/03_reset_password_screen.dart';
 import 'package:smart_soft/features/home/views/screens/06_home_screen.dart';
@@ -33,24 +34,33 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   onForgotPasswordClick(BuildContext context){
-    navigateToResetPasswordScreen(context);
+    _navigateToResetPasswordScreen(context);
   }
 
   onLoginClick(BuildContext context){
-    // if(formKey.currentState!.validate()) {
-    //   login(context);
-    // }
-    navigateToHomeScreen(context);
-
+    if(formKey.currentState!.validate()) {
+      login(context);
+    }
   }
 
   onRegisterClick(BuildContext context){
-    navigateToRegisterScreen(context);
+    _navigateToRegisterScreen(context);
+  }
+
+
+  String formatPhoneNumber(String phoneNumber){
+    String formatedPhoneNumber = "";
+    for(int i = 0; i < phoneNumber.length ; i++) {
+      if(int.tryParse(phoneNumber[i]) != null) {
+        formatedPhoneNumber += phoneNumber[i];
+      }
+    }
+    return formatedPhoneNumber;
   }
 
   login(BuildContext context){
     emit(LoginLoading());
-    getIt<LoginUseCase>().call(phoneNumberController.text, passwordController.text).then(
+    getIt<LoginUseCase>().call(formatPhoneNumber(phoneNumberController.text), passwordController.text).then(
       (value) => value.fold(
         (error) {
           emit(LoginError(error));
@@ -63,26 +73,22 @@ class LoginCubit extends Cubit<LoginState> {
         },
         (user) {
           emit(LoginSuccess());
-          navigateToNextScreen(context);
+          _navigateToHomeScreen(context);
           emit(LoginInitial());
         }
       )
     );
   }
 
-  navigateToRegisterScreen(BuildContext context){
-    Navigator.push(context,MaterialPageRoute(builder: (_)=> const RegisterScreen()));
+  _navigateToRegisterScreen(BuildContext context){
+    Navigator.push(context,MaterialPageRoute(builder: (_)=> RegisterScreen(registerType:  RegisterType.RegisterSeller,)));
   }
 
-  navigateToNextScreen(BuildContext context){
-
-  }
-
-  navigateToResetPasswordScreen(BuildContext context){
+  _navigateToResetPasswordScreen(BuildContext context){
     Navigator.push(context,MaterialPageRoute(builder: (_)=> const ResetPasswordScreen()));
   }
 
-  navigateToHomeScreen(BuildContext context){
+  _navigateToHomeScreen(BuildContext context){
     Navigator.push(context,MaterialPageRoute(builder: (_)=> const HomeScreen()));
   }
 

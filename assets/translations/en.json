@@ -19,6 +19,7 @@
   "register": "Register",
   "register_tailor": "Register as Tailor",
   "register_buyer": "Register as Buyer",
+  "register_admin": "Register as Admin",
 
   "login_description": "Unlock Your World: Sign In for a Personalized Experience",
   "register_description": "Embark on Your Journey: Register for Exclusive Access",
@@ -111,8 +112,13 @@
   "order": "Order",
   "completed_orders": "Completed orders",
   "uncompleted_orders": "Uncompleted orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "dashboard": "Dashboard",
 
-
+  "pending_seller": "Pending seller request",
+  "new_user": "New user",
+  "new_seller": "New seller",
+  "monthly_income": "Monthly income",
+  "welcome_back": "Welcome back"
 
 }

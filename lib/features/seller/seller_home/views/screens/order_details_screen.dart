@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
-import 'package:smart_soft/features/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
-import 'package:smart_soft/features/seller_home/views/components/user_info_card.dart';
-import 'package:smart_soft/features/variation/views/components/cloth_design_card.dart';
-import 'package:smart_soft/features/variation/views/components/cloth_size_card.dart';
 
-import '../../../../core/config/app_images.dart';
-import '../../../../core/views/widgets/custom_header.dart';
-import '../../../../core/views/widgets/space.dart';
-import '../../../../generated/locale_keys.g.dart';
+import '../../../../../core/config/app_images.dart';
+import '../../../../../core/views/widgets/custom_header.dart';
+import '../../../../../core/views/widgets/space.dart';
+import '../../../../../generated/locale_keys.g.dart';
+import '../../../../variation/views/components/cloth_design_card.dart';
+import '../../../../variation/views/components/cloth_size_card.dart';
+import '../blocs/seller_home/seller_home_cubit.dart';
+import '../components/user_info_card.dart';
+
 
 class OrderDetailsScreen extends StatelessWidget {
   const OrderDetailsScreen({super.key});

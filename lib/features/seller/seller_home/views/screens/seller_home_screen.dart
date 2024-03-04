@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/features/home/views/components/home_card.dart';
-import 'package:smart_soft/features/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
-import 'package:smart_soft/features/seller_home/views/components/order_card.dart';
-import 'package:smart_soft/features/seller_home/views/components/seller_drawer.dart';
-import 'package:smart_soft/generated/locale_keys.g.dart';
 
-import '../../../../core/config/app_images.dart';
-import '../../../../core/views/widgets/custom_page_indicator.dart';
-import '../../../../core/views/widgets/space.dart';
-import '../../../home/views/components/home_appbar.dart';
+import '../../../../../core/config/app_images.dart';
+import '../../../../../core/views/widgets/space.dart';
+import '../../../../../generated/locale_keys.g.dart';
+import '../../../../home/views/components/home_appbar.dart';
+import '../blocs/seller_home/seller_home_cubit.dart';
+import '../components/order_card.dart';
+import '../components/seller_drawer.dart';
 
 class SellerHomeScreen extends StatelessWidget {
   const SellerHomeScreen({super.key});

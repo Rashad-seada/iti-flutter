@@ -6,13 +6,15 @@ import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/config/app_theme.dart';
 import 'package:smart_soft/core/views/widgets/custom_network_image.dart';
 import 'package:smart_soft/core/views/widgets/space.dart';
-import 'package:smart_soft/features/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
+import 'package:smart_soft/features/admin/admin_home/views/bloc/admin_home/admin_home_cubit.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
-import '../../../../core/config/app_images.dart';
+import '../../../../../core/config/app_images.dart';
+import '../../../../seller/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
 
-class SellerDrawer extends StatelessWidget {
-  const SellerDrawer({super.key});
+
+class AdminDrawer extends StatelessWidget {
+  const AdminDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class SellerDrawer extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 InkWell(
-                  onTap: ()=> context.read<SellerHomeCubit>().closeDrawer(context),
+                  onTap: ()=> context.read<AdminHomeCubit>().closeDrawer(context),
                   child: SvgPicture.asset(
                     fit: BoxFit.fitWidth,
                     AppImages.close,

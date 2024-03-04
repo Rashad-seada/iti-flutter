@@ -14,9 +14,11 @@ import '../../../../core/views/widgets/custom_text_field.dart';
 import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
+import '../../utils/register_type.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  RegisterType registerType;
+  RegisterScreen({Key? key,required this.registerType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -107,15 +109,18 @@ class RegisterScreen extends StatelessWidget {
                   height: 1.h,
                 ),
 
-                Text(
+                if(registerType == RegisterType.RegisterSeller)
+                  Text(
                   LocaleKeys.trade_register,
                   style: AppTheme.mainTextStyle(
                       color: AppTheme.neutral400, fontSize: 12.sp),
                 ).tr(),
-                Space(
+                if(registerType == RegisterType.RegisterSeller)
+                  Space(
                   height: 0.5.h,
                 ),
-                CustomTextField(
+                if(registerType == RegisterType.RegisterSeller)
+                  CustomTextField(
                   controller: context.read<RegisterCubit>().tradeRegisterController,
                   validator: (_)=> context.read<RegisterCubit>().validateTradeRegister(),
                   prefixIcon: Padding(
@@ -129,19 +134,23 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   hint: LocaleKeys.trade_register_hint.tr(),
                 ),
-                Space(
+                if(registerType == RegisterType.RegisterSeller)
+                  Space(
                   height: 1.h,
                 ),
 
-                Text(
+                if(registerType == RegisterType.RegisterSeller)
+                  Text(
                   LocaleKeys.tax_id_number,
                   style: AppTheme.mainTextStyle(
                       color: AppTheme.neutral400, fontSize: 12.sp),
                 ).tr(),
-                Space(
+                if(registerType == RegisterType.RegisterSeller)
+                  Space(
                   height: 0.5.h,
                 ),
-                CustomTextField(
+                if(registerType == RegisterType.RegisterSeller)
+                  CustomTextField(
                   controller: context.read<RegisterCubit>().taxIdController,
                   validator: (_)=> context.read<RegisterCubit>().validateTaxId(),
                   prefixIcon: Padding(
@@ -155,24 +164,35 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   hint: LocaleKeys.tax_id_number_hint.tr(),
                 ),
-                Space(
+                if(registerType == RegisterType.RegisterSeller)
+                  Space(
                   height: 1.h,
                 ),
 
-                Text(
+                if(registerType == RegisterType.RegisterSeller)
+                  Text(
                   LocaleKeys.registration_certificate,
                   style: AppTheme.mainTextStyle(
                       color: AppTheme.neutral400, fontSize: 12.sp),
                 ).tr(),
-                Space(
+                if(registerType == RegisterType.RegisterSeller)
+                  Space(
                   height: 0.5.h,
                 ),
-                CertificateUpload(
-                  onTap: () => context.read<RegisterCubit>().onUploadClick(),
-                  width: double.infinity,
-                  height: 6.h,
+                if(registerType == RegisterType.RegisterSeller)
+                  BlocConsumer<RegisterCubit, RegisterState>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      return CertificateUpload(
+                          file: context.read<RegisterCubit>().file,
+                          onTap: () => context.read<RegisterCubit>().onUploadClick(),
+                          width: double.infinity,
+                          height: 6.h,
+                      );
+                    },
                 ),
-                Space(
+                if(registerType == RegisterType.RegisterSeller)
+                  Space(
                   height: 1.h,
                 ),
 
@@ -201,12 +221,10 @@ class RegisterScreen extends StatelessWidget {
               ],
             )),
 
-
-
-
             Space(
-              height: 3.h,
+              height: (registerType == RegisterType.RegisterSeller)? 3.h : 7.h,
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -249,7 +267,7 @@ class RegisterScreen extends StatelessWidget {
                               style: AppTheme.mainTextStyle(
                                   color: AppTheme.neutral100, fontSize: 14.sp),
                             ).tr(),
-                            onTap: ()=> context.read<RegisterCubit>().onRegisterClick(context),
+                            onTap: ()=> context.read<RegisterCubit>().onRegisterClick(context,registerType),
                           );
                 },
               ),
