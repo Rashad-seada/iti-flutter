@@ -11,7 +11,7 @@ class GetUserUseCase {
 
   AuthRepo repo = getIt<AuthRepo>();
 
-  Future<Either<Failure, UserEntity>> call(String phoneNumber,String password) async {
+  Future<Either<Failure, UserEntity>> call() async {
     return await repo.getUser();
   }
 

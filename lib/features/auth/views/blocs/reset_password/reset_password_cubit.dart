@@ -5,8 +5,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:meta/meta.dart';
 import 'package:smart_soft/features/auth/views/screens/04_otp_screen.dart';
 
+import '../../../../../core/core_feature/domain/usecases/validate_phone_use_case.dart';
 import '../../../../../core/di/app_module.dart';
-import '../../../../../core/usecases/validate_phone_use_case.dart';
 
 part 'reset_password_state.dart';
 

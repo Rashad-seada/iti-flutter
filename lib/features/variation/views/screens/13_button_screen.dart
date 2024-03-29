@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/features/variation/views/bloc/button/button_cubit.dart';
 
+import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_images.dart';
 import '../../../../core/views/widgets/custom_header.dart';
+import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../bloc/variation/variation_cubit.dart';
@@ -13,8 +16,21 @@ import '../components/button_card.dart';
 import '../components/variant_card.dart';
 import '../components/variant_nav_bar.dart';
 
-class ButtonScreen extends StatelessWidget {
+class ButtonScreen extends StatefulWidget {
   const ButtonScreen({super.key});
+
+  @override
+  State<ButtonScreen> createState() => _ButtonScreenState();
+}
+
+class _ButtonScreenState extends State<ButtonScreen> {
+
+  @override
+  void initState() {
+    context.read<ButtonCubit>().getButton(context);
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +41,7 @@ class ButtonScreen extends StatelessWidget {
         children: [
 
           Space(
-            height: 2.h ,
+            height: 2.h,
           ),
 
           Padding(
@@ -48,31 +64,43 @@ class ButtonScreen extends StatelessWidget {
             height: 3.h,
           ),
 
-          ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 7.w),
-            children: [
+          BlocConsumer<ButtonCubit,ButtonState>(
+            listener: (context, state) {},
+            builder: (context, state) {
 
-              ButtonCard(),
+              if(state is ButtonIsLoading){
+              return CustomProgressIndicator();
 
-              ButtonCard(),
+              } else if(state is ButtonError){
+              return Text(ButtonError.error.message);
 
-              ButtonCard(),
+              } else if(state is ButtonSuccess){
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 7.w),
+                itemCount: ButtonSuccess.buttons.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ButtonCard(
+                    title: ButtonSuccess.buttons[index].name ?? "Unknown",
+                    imgUrl: AppConsts.imgUrl + ButtonSuccess.buttons[index].imgUrl.toString(),
+                    price: ButtonSuccess.buttons[index].price ?? 0,
+                    onTap: ()=> context.read<ButtonCubit>().onButtonTap(ButtonSuccess.buttons[index].id ?? -1, context),
+                  );
 
-              ButtonCard(),
+                },
+              );
+              }
 
-
-            ],
+              return SizedBox();
+            },
           ),
+
 
 
         ],
       ),
 
-      bottomNavigationBar: VariantNavBar(
-        onNextTap: () => context.read<VariationCubit>().onButtonNextClick(context),
-      ),
     ));
   }
 }

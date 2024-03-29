@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:smart_soft/core/di/app_module.dart';
 import 'package:smart_soft/core/utils/token_helper.dart';
 import 'package:smart_soft/features/auth/data/entities/login_response.dart';
-import 'package:smart_soft/features/auth/domain/model/user_model.dart';
 import 'package:smart_soft/features/auth/domain/repo/auth_repo.dart';
 
 import '../../../../core/errors/failure.dart';
@@ -23,7 +22,7 @@ class LoginUseCase {
                         return left(RemoteDataFailure("The token returned with null", failureCode: 4));
                       }
 
-                      final user =  getIt<TokenHelper>().userFromToken(loginResponse.obj!.token!);
+                      final user = getIt<TokenHelper>().userFromToken(loginResponse.obj!.token!);
 
                       await getIt<AuthRepo>().setUser(user).then((value) => value.fold(
                               (userError) {

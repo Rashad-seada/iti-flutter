@@ -2,7 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:smart_soft/features/cart/views/blocs/cart/cart_cubit.dart';
 import 'package:smart_soft/features/cart/views/screens/14_cart_screen.dart';
 import 'package:smart_soft/generated/locale_keys.g.dart';
 
@@ -34,7 +36,8 @@ class DetailsCubit extends Cubit<DetailsState> {
 
   ];
 
-  onNextClick(BuildContext context) {
+  onNextClick(BuildContext context) async {
+    await context.read<CartCubit>().addToCart(context);
     Navigator.push(context,MaterialPageRoute(builder: (_)=> CartScreen(showContinueButton: true,)));
   }
 

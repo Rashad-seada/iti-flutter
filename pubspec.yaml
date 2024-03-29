@@ -52,7 +52,7 @@ dependencies:
 
   # Services
   image_picker:
-  internet_connection_checker_plus:
+  connectivity_plus: 5.0.2
   get_it:
 
   # Firebase
@@ -65,7 +65,6 @@ dependencies:
   activout_firebase_options_selector:
 
   # UI
-  google_fonts:
   sizer:
   easy_localization:
   flutter_svg:
@@ -98,7 +97,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -115,6 +114,7 @@ flutter:
   assets:
     - images/
     - assets/translations/
+    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -127,13 +127,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
+  fonts:
+    - family: Almarai
+      fonts:
+        - asset: assets/fonts/Almarai-Bold.ttf
+        - asset: assets/fonts/Almarai-ExtraBold.ttf
+        - asset: assets/fonts/Almarai-Light.ttf
+        - asset: assets/fonts/Almarai-Regular.ttf
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf

@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/features/cart/views/blocs/cart/cart_cubit.dart';
 import 'package:smart_soft/features/variation/views/bloc/size/size_cubit.dart';
 import 'package:smart_soft/features/variation/views/components/embroidery_card.dart';
 
 import '../../../../core/config/app_images.dart';
 import '../../../../core/config/app_theme.dart';
 import '../../../../core/views/widgets/custom_header.dart';
+import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/custom_text_field.dart';
+import '../../../../core/views/widgets/main_button.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../bloc/variation/variation_cubit.dart';
@@ -265,8 +268,26 @@ class SizeScreen extends StatelessWidget {
         ),
       ),
 
-      bottomNavigationBar: VariantNavBar(
-        onNextTap: () => context.read<VariationCubit>().onSizeNextClick(context),
+      bottomNavigationBar: BlocConsumer<CartCubit, CartState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Padding(
+            padding:  EdgeInsets.all(5.w),
+            child: MainButton(
+              color: AppTheme.primary900,
+              width: 86.w,
+              height: 6.5.h,
+              label: (state is CartIsLoading)? CustomProgressIndicator(
+                color: AppTheme.neutral100,
+              ) : Text(
+                "Add to cart",
+                style: AppTheme.mainTextStyle(
+                    color: AppTheme.neutral100, fontSize: 13.sp),
+              ).tr(),
+              onTap: ()=> context.read<CartCubit>().onAddToCartTap(context),
+            ),
+          );
+        },
       ),
     ));
   }

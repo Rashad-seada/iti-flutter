@@ -6,33 +6,42 @@ import 'package:smart_soft/core/views/widgets/space.dart';
 
 class VariantCard extends StatelessWidget {
   bool isSelect;
-  VariantCard({super.key,this.isSelect = true});
+  String title;
+  String imgUrl;
+  void Function()? onTap;
+  VariantCard({super.key,this.isSelect = true,required this.title,required this.imgUrl, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(2.w),
-        border: Border.all(color: (isSelect)? AppTheme.primary900 : Colors.transparent,width: 1.5)
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(2.w),
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(2.w),
+          border: Border.all(color: (isSelect)? AppTheme.primary900 : Colors.transparent,width: 1.5)
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
 
-          CustomNetworkImage(
-            url: '',
-          ),
-          Space(height: 1.5.h,),
+            CustomNetworkImage(
+              url: imgUrl,
+              width: 12.w,
+              height: 12.w,
+            ),
+            Space(height: 1.5.h,),
 
 
-          Text(
-            "عادي",
-            style: AppTheme.mainTextStyle(
-                color: AppTheme.neutral900, fontSize: 10.sp),
-          ),
+            Text(
+              title,
+              style: AppTheme.mainTextStyle(
+                  color: AppTheme.neutral900, fontSize: 10.sp),
+            ),
 
-        ],
+          ],
+        ),
       ),
     );
   }

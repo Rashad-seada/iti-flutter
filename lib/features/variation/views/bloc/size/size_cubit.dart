@@ -2,7 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:smart_soft/core/di/app_module.dart';
-import 'package:smart_soft/core/usecases/validate_text_use_case.dart';
+
+import '../../../../../core/core_feature/domain/usecases/validate_text_use_case.dart';
 
 part 'size_state.dart';
 

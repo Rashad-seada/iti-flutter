@@ -3,17 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/features/variation/views/bloc/chest/chest_cubit.dart';
 
+import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_images.dart';
 import '../../../../core/views/widgets/custom_header.dart';
+import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../bloc/variation/variation_cubit.dart';
 import '../components/variant_card.dart';
 import '../components/variant_nav_bar.dart';
 
-class ChestScreen extends StatelessWidget {
+class ChestScreen extends StatefulWidget {
   const ChestScreen({super.key});
+
+  @override
+  State<ChestScreen> createState() => _ChestScreenState();
+}
+
+class _ChestScreenState extends State<ChestScreen> {
+
+ @override
+  void initState() {
+    context.read<ChestCubit>().getChest(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +38,7 @@ class ChestScreen extends StatelessWidget {
         children: [
 
           Space(
-            height: 2.h ,
+            height: 2.h,
           ),
 
           Padding(
@@ -46,20 +61,40 @@ class ChestScreen extends StatelessWidget {
             height: 3.h,
           ),
 
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 7.w),
-            gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, // Number of columns
-              crossAxisSpacing: 3.w, // Spacing between columns
-              mainAxisSpacing: 3.w, // Spacing between rows
-            ),
-            //padding: EdgeInsets.all(10.0), // Padding around the GridView
-            itemCount: 6, // Number of items
-            itemBuilder: (BuildContext context, int index) {
-              // Function that returns a widget for each item
-              return VariantCard(isSelect: index == 0,);
+          BlocBuilder<ChestCubit, ChestState>(
+            builder: (context, state) {
+
+              if(state is ChestIsLoading){
+              return CustomProgressIndicator();
+
+              } else if(state is ChestError){
+              return Text(ChestError.error.message);
+
+              } else if(state is ChestSuccess){
+              return GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 7.w),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, // Number of columns
+                  crossAxisSpacing: 3.w, // Spacing between columns
+                  mainAxisSpacing: 3.w, // Spacing between rows
+                ),
+                //padding: EdgeInsets.all(10.0), // Padding around the GridView
+                itemCount: ChestSuccess.chests.length,
+                // Number of items
+                itemBuilder: (BuildContext context, int index) {
+                  // Function that returns a widget for each item
+                  return VariantCard(
+                    isSelect: index == 0, 
+                    title: ChestSuccess.chests[index].name ?? "Unknown",
+                    imgUrl: AppConsts.imgUrl + ChestSuccess.chests[index].imgUrl.toString(),
+                    onTap: ()=> context.read<ChestCubit>().onChestTap(ChestSuccess.chests[index].id ?? -1, context),
+                  );
+                },
+              );}
+
+              return SizedBox();
             },
           ),
 
@@ -67,9 +102,6 @@ class ChestScreen extends StatelessWidget {
         ],
       ),
 
-      bottomNavigationBar: VariantNavBar(
-        onNextTap: () => context.read<VariationCubit>().onChestNextClick(context),
-      ),
     ));
   }
 }

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppTheme {
 
-  static TextStyle? mainTextStyle ({Color? color, double? fontSize,FontWeight? fontWeight}) => GoogleFonts.cairo(color: color, fontSize: fontSize,fontWeight: fontWeight,);
+  static TextStyle? mainTextStyle({
+    Color? color,
+    double? fontSize,
+    FontWeight? fontWeight,
+  }) =>
+      TextStyle(
+        color: color,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontFamily: 'Almarai',
+      );
 
   static const Color neutral900 = Color(0xff111827);
   static const Color neutral800 = Color(0xff1F2937);

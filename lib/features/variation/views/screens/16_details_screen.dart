@@ -5,15 +5,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/features/variation/views/components/cloth_design_card.dart';
 import 'package:smart_soft/features/variation/views/components/cloth_size_card.dart';
-import 'package:smart_soft/features/variation/views/components/embroidery_card.dart';
 
 import '../../../../core/config/app_images.dart';
 import '../../../../core/views/widgets/custom_header.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../bloc/details/details_cubit.dart';
-import '../bloc/variation/variation_cubit.dart';
-import '../components/variant_card.dart';
+
 import '../components/variant_nav_bar.dart';
 
 class DetailsScreen extends StatelessWidget {

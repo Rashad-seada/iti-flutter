@@ -3,18 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
+import 'package:smart_soft/features/variation/views/bloc/embroidery/embroidery_cubit.dart';
 import 'package:smart_soft/features/variation/views/components/embroidery_card.dart';
 
+import '../../../../core/config/app_consts.dart';
 import '../../../../core/config/app_images.dart';
 import '../../../../core/views/widgets/custom_header.dart';
+import '../../../../core/views/widgets/custom_progress_indicator.dart';
 import '../../../../core/views/widgets/space.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../bloc/variation/variation_cubit.dart';
 import '../components/variant_card.dart';
 import '../components/variant_nav_bar.dart';
 
-class EmbroideryScreen extends StatelessWidget {
+class EmbroideryScreen extends StatefulWidget {
   const EmbroideryScreen({super.key});
+
+  @override
+  State<EmbroideryScreen> createState() => _EmbroideryScreenState();
+}
+
+class _EmbroideryScreenState extends State<EmbroideryScreen> {
+
+  @override
+  void initState() {
+    context.read<EmbroideryCubit>().getEmbroidery(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +40,7 @@ class EmbroideryScreen extends StatelessWidget {
         children: [
 
           Space(
-            height: 2.h ,
+            height: 2.h,
           ),
 
           Padding(
@@ -48,31 +63,39 @@ class EmbroideryScreen extends StatelessWidget {
             height: 3.h,
           ),
 
-          ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 7.w),
-            children: [
+          BlocConsumer<EmbroideryCubit, EmbroideryState>(
+            listener: (context, state) {},
+            builder: (context, state) {
 
-              EmbroideryCard(),
+              if(state is EmbroideryIsLoading){
+              return CustomProgressIndicator();
 
-              EmbroideryCard(),
+              } else if(state is EmbroideryError){
+              return Text(EmbroideryError.error.message);
 
-              EmbroideryCard(),
+              } else if(state is EmbroiderySuccess){}
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: EmbroiderySuccess.embroiderys.length,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.symmetric(horizontal: 7.w),
+                itemBuilder: (BuildContext context, int index) {
+                  return EmbroideryCard(
+                    title: EmbroiderySuccess.embroiderys[index].name ?? "Unknown",
+                    imgUrl: AppConsts.imgUrl + EmbroiderySuccess.embroiderys[index].imgUrl.toString(),
+                    price: EmbroiderySuccess.embroiderys[index].price ?? 0,
+                    onTap: ()=> context.read<EmbroideryCubit>().onEmbroideryTap(EmbroiderySuccess.embroiderys[index].id ?? -1, context),
+                  );
 
-              EmbroideryCard(),
-
-
-            ],
+                },
+              );
+            },
           ),
 
 
         ],
       ),
 
-      bottomNavigationBar: VariantNavBar(
-        onNextTap: () => context.read<VariationCubit>().onEmbroideryNextClick(context),
-      ),
     ));
   }
 }

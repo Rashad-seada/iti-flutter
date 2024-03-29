@@ -12,7 +12,9 @@ import '../../../../core/views/widgets/main_button.dart';
 import '../../../../generated/locale_keys.g.dart';
 
 class HomeCard extends StatelessWidget {
-  const HomeCard({super.key});
+  String title;
+  String imageUrl;
+  HomeCard({super.key,required this.title,required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class HomeCard extends StatelessWidget {
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,
-                    "https://eg.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/42/757054/1.jpg?9344"
+                    imageUrl
                 )),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 1.h),
@@ -53,7 +55,7 @@ class HomeCard extends StatelessWidget {
             SlicedContainer(
               color: Colors.white,
               child: Text(
-                "Shorto جلابيه رجالي كستور - ازرق / ابيض / خطين بنى",
+                title,
                 style: AppTheme.mainTextStyle(
                     color: AppTheme.neutral900, fontSize: 16.sp),
               ).tr(),

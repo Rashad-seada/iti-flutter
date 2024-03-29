@@ -9,7 +9,8 @@ import '../../config/app_theme.dart';
 class CustomHeader extends StatelessWidget {
   String title;
   bool showCart;
-  CustomHeader({super.key,this.title = "Title",this.showCart = true});
+  bool showBackButton;
+  CustomHeader({super.key,this.title = "Title",this.showCart = true,this.showBackButton = true});
 
   pop(BuildContext context){
     Navigator.pop(context);
@@ -25,6 +26,7 @@ class CustomHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        (showBackButton)?
         InkWell(
           borderRadius: BorderRadius.circular(100.w),
           onTap: () {
@@ -35,7 +37,7 @@ class CustomHeader extends StatelessWidget {
             width: 7.w,
             height: 7.w,
           ),
-        ),
+        ) : SizedBox(),
         Text(
           title,
           style: AppTheme.mainTextStyle(

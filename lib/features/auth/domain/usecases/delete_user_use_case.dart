@@ -11,7 +11,7 @@ class DeleteUserUseCase {
 
   AuthRepo repo = getIt<AuthRepo>();
 
-  Future<Either<Failure, void>> call(String phoneNumber,String password) async {
+  Future<Either<Failure, void>> call() async {
     return await repo.deleteUser();
   }
 

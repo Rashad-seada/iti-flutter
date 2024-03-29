@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,7 +55,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         throw RemoteDataException("The was a server internal error");
       }
 
-      print(response.data);
 
       Map<String,dynamic> responseData = response.data;
 
@@ -72,22 +70,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<RegisterCustomerResponse> registerCustomer({required String username, required String phoneNumber, required String password}) async {
     try {
 
-      FormData requestData = FormData.fromMap({
+      final requestData = {
         "Name": username,
         "PhoneNumber": phoneNumber,
         "PassWord": password
-      });
+      };
 
       final response = await _client.post(
           AppConsts.url + AppConsts.registerBuyerEndPoint,
           data: requestData
       );
 
-      if(response.statusCode! >= 500){
-        throw RemoteDataException("The was a server internal error");
-      }
+      print(response.data);
 
       Map<String,dynamic> responseData = response.data;
+
 
       return RegisterCustomerResponse.fromJson(responseData);
 
@@ -115,11 +112,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           data: requestData
       );
 
-      if(response.statusCode! >= 500){
-        throw RemoteDataException("The was a server internal error");
-      }
-
       Map<String,dynamic> responseData = response.data;
+
+      print(response.data);
 
       return RegisterSellerResponse.fromJson(responseData,);
 
@@ -143,13 +138,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           data: formData
       );
 
-      if(response.statusCode! >= 500){
-        throw RemoteDataException("The was a server internal error");
-      }
-
       Map<String,dynamic> responseData = json.decode(response.data);
 
-      return ResetPasswordResponse.fromJson(responseData,);
+      return ResetPasswordResponse.fromJson(responseData);
 
     } catch (e) {
       throw RemoteDataException(e.toString());

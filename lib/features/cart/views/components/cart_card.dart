@@ -10,7 +10,9 @@ import '../../../../core/config/app_theme.dart';
 import '../../../../core/views/widgets/space.dart';
 
 class CartCard extends StatelessWidget {
-  const CartCard({super.key});
+  double price;
+  String fabric;
+  CartCard({super.key,required this.price,required this.fabric});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,7 @@ class CartCard extends StatelessWidget {
 
                         Space(width: 3.w,),
                         Text(
-                          "الديباج السكري",
+                          fabric,
                           style: AppTheme.mainTextStyle(
                               color: AppTheme.neutral600, fontSize: 10.sp),
                         ),
@@ -101,7 +103,7 @@ class CartCard extends StatelessWidget {
 
                         Space(width: 3.w,),
                         Text(
-                          "198",
+                          price.toString(),
                           style: AppTheme.mainTextStyle(
                               color: AppTheme.primary900, fontSize: 14.sp),
                         ),

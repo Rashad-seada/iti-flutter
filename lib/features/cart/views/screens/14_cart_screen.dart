@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smart_soft/core/views/widgets/custom_header.dart';
+import 'package:smart_soft/core/views/widgets/custom_progress_indicator.dart';
 import 'package:smart_soft/core/views/widgets/space.dart';
 import 'package:smart_soft/features/cart/views/blocs/cart/cart_cubit.dart';
 import 'package:smart_soft/features/cart/views/components/cart_card.dart';
@@ -13,9 +14,22 @@ import '../../../../generated/locale_keys.g.dart';
 import '../components/cart_nav_bar.dart';
 
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   bool showContinueButton;
-  CartScreen({super.key,this.showContinueButton = false});
+  bool showBackButton;
+  CartScreen({super.key, this.showContinueButton = false,this.showBackButton = true});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+
+  @override
+  void initState() {
+    context.read<CartCubit>().getCart();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,44 +39,57 @@ class CartScreen extends StatelessWidget {
         children: [
 
           Space(
-            height: 2.h ,
+            height: 2.h,
           ),
 
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 6.5.w),
-            child: CustomHeader(title: LocaleKeys.cart.tr(),showCart: false,),
+            child: CustomHeader(title: LocaleKeys.cart.tr(), showCart: false,showBackButton: widget.showBackButton,),
           ),
 
           Space(
             height: 3.h,
           ),
 
-          ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 7.w),
-            children: [
+          BlocConsumer<CartCubit,CartState>(
+            listener: (context, state) {},
+            builder: (context, state) {
 
-              CartCard(),
+              if(state is CartIsLoading){
+                return CustomProgressIndicator();
 
-              CartCard(),
+              } else if(state is CartError){
+                return Text(CartError.failure.message);
 
-              CartCard(),
+              } else if(state is CartSuccess){
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.symmetric(horizontal: 7.w),
+                  itemCount: CartSuccess.cartResponse?.obj?.details?.length ?? 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CartCard(
+                      price: 00,
+                      fabric:  CartSuccess.cartResponse?.obj?.details?[index].textureId.toString() ?? '--',
+                    );
+                  },
+                );
+              }
 
-              CartCard(),
+              return SizedBox();
 
-
-            ],
+            },
           ),
-
 
 
         ],
       ),
       bottomNavigationBar: CartNavBar(
-        showContinueButton: showContinueButton,
-        onCheckoutClick: ()=> context.read<CartCubit>().onCheckoutClick(context),
-        onContinueShoppingClick: ()=> context.read<CartCubit>().onContinueShoppingClick(context),
+        showContinueButton: widget.showContinueButton,
+        onCheckoutClick: () =>
+            context.read<CartCubit>().onCheckoutClick(context),
+        onContinueShoppingClick: () =>
+            context.read<CartCubit>().onContinueShoppingClick(context),
       ),
     ));
   }
