@@ -108,7 +108,8 @@ class CodegenLoader extends AssetLoader{
   "new_user": "مستخدم جديد",
   "new_seller": "خياط جديد",
   "monthly_income": "الدخل الشهري",
-  "welcome_back": "اهلا من جديد"
+  "welcome_back": "اهلا من جديد",
+  "empty_seller_item": "ليس لديك أي عناصر في هذا الفئة، حاول إضافة عنصر واحد على الأقل حتى يتمكن العملاء من طلب منك"
 };
 static const Map<String,dynamic> en = {
   "on_boarding_title_1": "Digital Catalog",
@@ -204,7 +205,8 @@ static const Map<String,dynamic> en = {
   "new_user": "New user",
   "new_seller": "New seller",
   "monthly_income": "Monthly income",
-  "welcome_back": "Welcome back"
+  "welcome_back": "Welcome back",
+  "empty_seller_item": "You have no items in this category, try adding at least one item so that the customers can order from you"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

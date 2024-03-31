@@ -35,7 +35,7 @@ class SellerHomeScreen extends StatelessWidget {
                 title: LocaleKeys.home.tr(),
                 trailingIcon: AppImages.menu,
                 onTrailingIconTap: () => context.read<SellerHomeCubit>().openDrawer(),
-                leadingIcon: AppImages.cart,
+                leadingIcon: "",
                 onLeadingIconTap: () {},
               ),
             ),

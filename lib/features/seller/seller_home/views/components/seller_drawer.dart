@@ -144,6 +144,35 @@ class SellerDrawer extends StatelessWidget {
             ),
           ),
 
+          Space(
+            height: 2.5.h,
+          ),
+
+          InkWell(
+            onTap: ()=> context.read<SellerHomeCubit>().onViewSellersVariants(context),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.exposure_plus_1,
+                    size: 6.w,
+                    color: AppTheme.neutral900,
+                  ),
+                  Space(
+                    width: 3.w,
+                  ),
+
+                  Text(
+                    "Add seller variants",
+                    style: AppTheme.mainTextStyle(
+                        color: AppTheme.neutral900, fontSize: 13.sp),
+                  ).tr(),
+                ],
+              ),
+            ),
+          ),
+
         ],
       ),
     );

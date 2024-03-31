@@ -49,5 +49,7 @@ class AppImages {
   static String inbox = "images/inbox.svg";
   static String calender = "images/calender.svg";
 
+  static String empty = "images/empty.png";
+
 
 }

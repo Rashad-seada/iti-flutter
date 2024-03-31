@@ -51,6 +51,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         data: requestData
       );
 
+      print(response.data);
+
       if(response.statusCode! >= 500){
         throw RemoteDataException("The was a server internal error");
       }

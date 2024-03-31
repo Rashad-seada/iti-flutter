@@ -25,6 +25,7 @@ import 'features/auth/views/blocs/register/register_cubit.dart';
 import 'features/onboarding/view/bloc/on_boarding_cubit.dart';
 import 'features/onboarding/view/screens/00_on_boarding_screen.dart';
 import 'features/order/views/blocs/payments/payments_cubit.dart';
+import 'features/seller/add_variation/views/blocs/seller_variations/seller_variations_cubit.dart';
 import 'features/seller/seller_home/views/blocs/seller_home/seller_home_cubit.dart';
 import 'generated/codegen_loader.g.dart';
 
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => SleeveCubit()),
         BlocProvider(create: (_) => ButtonCubit()),
         BlocProvider(create: (_) => EmbroideryCubit()),
+        BlocProvider(create: (_) => SellerVariationsCubit()),
 
       ],
       child: Sizer(
