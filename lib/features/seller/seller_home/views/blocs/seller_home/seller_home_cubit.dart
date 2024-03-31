@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:smart_soft/core/config/app_images.dart';
-import 'package:smart_soft/core/config/app_theme.dart';
 import 'package:smart_soft/features/seller/add_variation/views/screens/view_variations_categories_screen.dart';
 import '../../../../../../generated/locale_keys.g.dart';
 import '../../../../../variation/views/utils/design_model.dart';
