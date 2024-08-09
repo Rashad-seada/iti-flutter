@@ -9,57 +9,49 @@ import '../../../../core/views/widgets/space.dart';
 class OnBoardingPage extends StatelessWidget {
   String image;
   String title;
-  String description;
 
   OnBoardingPage({
     Key? key,
     required this.image,
     required this.title,
-    required this.description,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 7.w),
-      child: ListView(
+    return ListView(
 
-        // mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.start,
+      // crossAxisAlignment: CrossAxisAlignment.center,
 
-          children: [
-            Space(
-              height: 14.h,
-            ),
-            Center(
-              child: Center(
-                  child: SvgPicture.asset(
-                    image,
-                    width: 86.w,
-                    height: 23.h,
-                  )),
-            ),
-            Space(
-              height: 16.h,
-            ),
-            Center(
+        children: [
+
+          Space(
+            height: 10.h,
+          ),
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.w),
               child: Text(
                 title,
-                style: AppTheme.mainTextStyle(color: AppTheme.neutral900,fontSize: 20.sp,),
+                style: TextStyle(color: AppTheme.neutral900,fontSize: 14.sp,fontWeight: FontWeight.w900),
                 textAlign: TextAlign.center,
               ).tr(),
             ),
-            Space(
-              height: 3.h,
-            ),
-            Center(
-              child: Text(
-                description,
-                style: AppTheme.mainTextStyle(color: AppTheme.neutral700,fontSize: 12.sp),
-                textAlign: TextAlign.center,
-              ).tr(),
-            )
-          ]),
-    );
+          ),
+          Space(
+            height: 8.h,
+          ),
+          Center(
+            child: Center(
+                child: SvgPicture.asset(
+                  fit: BoxFit.cover,
+                  image,
+                  width: 100.w,
+                  height: 45.h,
+                )),
+          ),
+
+
+        ]);
   }
 }

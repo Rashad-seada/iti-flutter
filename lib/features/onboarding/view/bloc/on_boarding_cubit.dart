@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_soft/features/auth/views/screens/00_auth_methods_screen.dart';
 
 part 'on_boarding_state.dart';
 
@@ -17,12 +16,8 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   onNextClick(BuildContext context) {
-    if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => AuthMethodsScreen()),
-        //(route) => false
-      );
+    if (index == 3) {
+
       //navigateToAuthMethodsScreen(context);
     } else {
       index += 1;
@@ -36,10 +31,6 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   navigateToAuthMethodsScreen(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => AuthMethodsScreen()),
-        //(route) => false
-    );
+
   }
 }
